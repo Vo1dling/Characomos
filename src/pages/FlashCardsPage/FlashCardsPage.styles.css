@@ -1,0 +1,7 @@
+.flash-page {
+  background-color: rgb(180, 180, 180);
+  border: 5px black solid;
+  width: 99.4%;
+  min-height: 99.9%;
+  max-height: 199.9%;
+}
