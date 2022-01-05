@@ -5,7 +5,7 @@ import HomePage from "./pages/HomePage/HomePage.pages";
 import FlashPage from "./pages/FlashCardsPage/FlashCardsPage.pages";
 import CreateEditPage from "./pages/CreateEditPage/CreateEditPage.pages";
 import CharacterPage from "./pages/CharacterPage/CharacterPage.pages";
-import api from "./components/api/api";
+import api from "./components/api/api.js";
 
 const App = () => {
   const [data, setData] = useState([]);

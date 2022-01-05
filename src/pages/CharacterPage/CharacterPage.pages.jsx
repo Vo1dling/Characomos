@@ -1,11 +1,16 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import api from "../../components/api/api";
 import "./CharacterPage.styles.css";
-const CharacterPage = ({ char, setID, editID, editing, setEdit }) => {
+const CharacterPage = ({ char, setID, setEdit }) => {
   const editbutton = () => {
     setID(char.id);
     setEdit("true");
   };
+  const deleteItem = async () => {
+    await api.delete(char.id);
+  };
+
   return (
     <div className="character-page">
       <div className="grid-container">
@@ -33,6 +38,9 @@ const CharacterPage = ({ char, setID, editID, editing, setEdit }) => {
         </div>
         <Link onClick={editbutton} className="edit" to="/create">
           Edit
+        </Link>
+        <Link onClick={deleteItem} className="delete" to="/">
+          Delete
         </Link>
       </div>
     </div>
