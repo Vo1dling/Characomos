@@ -127,7 +127,9 @@ const FlashPage = (props) => {
       <p className="correct-text">
         Correct Answers: {completed}/{props.data.length}
       </p>
-      <p className="difficulty">Choose Difficulty</p>
+      <p className="difficulty">
+        Current Difficulty : {props.currentDifficulty}
+      </p>
       <CustomButton
         text="Easy"
         onClick={changeDifficulty}

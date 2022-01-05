@@ -31,7 +31,7 @@ const CharacterPage = ({ char, setID, editID, editing, setEdit }) => {
           <hr />
           <p className="para-content">{char.paragraph3Content}</p>
         </div>
-        <Link onClick={editbutton} to="/create">
+        <Link onClick={editbutton} className="edit" to="/create">
           Edit
         </Link>
       </div>

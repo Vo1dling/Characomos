@@ -1,7 +1,6 @@
 import React, { useEffect, useRef } from "react";
 import api from "../../components/api/api";
 import CustomInput from "../../components/CustomInput/CustomInput.components";
-import CustomButton from "../../components/CustomButton/CustomButton.components";
 import "./CreateEditPage.styles.css";
 import { Link } from "react-router-dom";
 const CreatePage = ({ data, editID, editing, setEdit }) => {

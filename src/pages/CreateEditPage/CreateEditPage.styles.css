@@ -84,3 +84,21 @@ body::-webkit-scrollbar {
 .submit:hover {
   background-color: rgb(100, 100, 100);
 }
+@media only screen and (min-width: 375px) and (max-width: 425px) {
+  .card-container {
+    grid-row: 1/2;
+  }
+  .flash-inputs {
+    grid-row: 2/3;
+  }
+  .paragraph-container {
+    grid-column: 1/2;
+  }
+  .submit {
+    margin-top: 1rem;
+    margin-left: 10rem;
+    width: 20vw;
+    height: 5vh;
+    grid-column: 1/2;
+  }
+}
