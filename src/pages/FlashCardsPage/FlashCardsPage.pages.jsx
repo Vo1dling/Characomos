@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Card from "../../components/Card/Card.components";
 import "./FlashCardsPage.styles.css";
 import CustomButton from "../../components/CustomButton/CustomButton.components";
@@ -7,6 +7,12 @@ const FlashPage = (props) => {
   const cardRef = useRef();
   const [currentCard, setCurrentCard] = useState({});
   const [completed, setCompleted] = useState(0);
+
+  useEffect(() => {
+    changeCardText();
+    getNewCard();
+    // eslint-disable-next-line
+  }, [props.currentDifficulty]);
   const revealAnswer = () => {
     cardRef.current.classList.add("flipped");
     confirmationMenuRef.current.classList.remove("hidden");
@@ -34,18 +40,55 @@ const FlashPage = (props) => {
         }
       }
   };
+
+  const changeDifficulty = (e) => {
+    if (props.currentDifficulty === "") {
+      props.setDifficulty(`${e.target.innerText}`);
+      props.data.forEach((item) => {
+        item.isAnswered = false;
+        setCompleted(0);
+        changeCardText();
+      });
+    } else {
+      props.setDifficulty(`${e.target.innerText}`);
+      props.data.forEach((item) => {
+        item.isAnswered = false;
+        setCompleted(0);
+      });
+    }
+  };
   const confirmAnswer = () => {
     if (completed < props.data.length) {
       currentCard.isAnswered = true;
       setCompleted(completed + 1);
+      getNewCard();
+    }
+  };
+  const changeCardText = () => {
+    if (props.currentDifficulty === "Easy") {
+      props.data.forEach((item) => {
+        item.currentQuestion = `What is ${item.name}'s origin world`;
+        item.currentAnswer = item.origin;
+        console.log("works");
+      });
+    } else if (props.currentDifficulty === "Medium") {
+      props.data.forEach((item) => {
+        item.currentQuestion = item.normalQuestion;
+        item.currentAnswer = item.normalAnswer;
+      });
+    } else if (props.currentDifficulty === "Hard") {
+      props.data.forEach((item) => {
+        item.currentQuestion = `${item.hardQuestion} and what region are they from?`;
+        item.currentAnswer = `${item.hardAnswer} and they are from ${item.region}`;
+      });
     }
   };
 
   return (
     <div className="main-container">
       <Card
-        question={currentCard.normalQuestion}
-        answer={currentCard.normalAnswer}
+        question={currentCard.currentQuestion}
+        answer={currentCard.currentAnswer}
         cardRef={cardRef}
       />
       <div className="button-container">
@@ -87,11 +130,18 @@ const FlashPage = (props) => {
       <p className="difficulty">Choose Difficulty</p>
       <CustomButton
         text="Easy"
-        onClick={() => {
-          hideAnswer();
-          confirmAnswer();
-        }}
-        className="confirm-btn"
+        onClick={changeDifficulty}
+        className="difficulty-button"
+      />
+      <CustomButton
+        text="Medium"
+        onClick={changeDifficulty}
+        className="difficulty-button"
+      />
+      <CustomButton
+        text="Hard"
+        onClick={changeDifficulty}
+        className="difficulty-button"
       />
     </div>
   );

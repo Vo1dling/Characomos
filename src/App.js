@@ -41,11 +41,15 @@ const App = () => {
       </Route>
 
       <Route path="/flash">
-        <FlashPage data={data} />
+        <FlashPage
+          data={data}
+          currentDifficulty={currentDifficulty}
+          setDifficulty={setDifficulty}
+        />
       </Route>
       {data.map((char) => {
         return (
-          <Route path={`/${char.name}`}>
+          <Route key={char.id} path={`/${char.name}`}>
             <CharacterPage char={char} />
           </Route>
         );
