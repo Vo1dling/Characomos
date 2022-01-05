@@ -19,9 +19,12 @@ const CreatePage = ({ data, editID, editing, setEdit }) => {
   const mediumARef = useRef("");
   const hardQRef = useRef("");
   const hardARef = useRef("");
+
   useEffect(() => {
     setupEdit();
+    // eslint-disable-next-line
   }, [editing]);
+
   const postItem = async (e) => {
     const name = nameRef.current.value;
     const imageURL = imageRef.current.value;
