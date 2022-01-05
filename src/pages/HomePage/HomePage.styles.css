@@ -19,6 +19,7 @@
   margin-top: 10rem;
   display: flex;
   flex-direction: column;
+  z-index: 1;
 }
 .search-bar {
   display: flex;

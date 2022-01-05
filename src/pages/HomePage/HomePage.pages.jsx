@@ -13,7 +13,7 @@ const HomePage = ({ filteredData, search }) => {
         {filteredData.map((item) => {
           return (
             <Link
-              to={item.name}
+              to={item.id}
               key={item.id}
             >{`${item.name} (${item.origin})`}</Link>
           );

@@ -5,7 +5,7 @@
 body::-webkit-scrollbar {
   display: none;
 }
-.create-page {
+.character-page {
   background-color: rgb(180, 180, 180);
   border: 5px black solid;
   width: 99.4%;
@@ -14,55 +14,51 @@ body::-webkit-scrollbar {
 }
 .paragraph-container {
   margin-top: 0.5rem;
-  grid-column-end: span 4;
+  margin-left: 1rem;
 }
-.grid {
+.grid-container {
   height: 100%;
   width: 100%;
   display: grid;
-  grid-template-columns: repeat(5, 0.5fr);
-  grid-template-rows: repeat(4, 0.23fr);
+  grid-template-columns: repeat(20, 93.5px);
+  grid-template-rows: repeat(12, 93.5px);
 }
-.input {
-  margin: 1rem 0 0 1rem;
-  background: #ccc;
-  color: #333;
-  transition: border-color 0.25s ease;
+
+.para-content {
   width: 90%;
-  height: 7.5%;
+  height: 30px;
 }
-.content {
+.para-title {
   width: 90%;
-  height: 85%;
+  height: 30px;
 }
-.title {
-  width: 90%;
-  height: 7.5%;
-}
-.card-container {
+.character-page .card-container {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   margin: 1rem;
+
+  border: 5px black solid;
+  grid-column: 17/21;
+  grid-row: 1/6;
 }
 .character-image {
   width: 300px;
   height: 300px;
-  border: 5px black solid;
 }
-.origin,
-.region,
-.author {
+.char {
   margin: 0.5rem 0.25rem 0 0;
 }
-.question {
-  margin-top: 2rem;
+.para1 {
+  grid-column: 1/17;
+  grid-row: 1/5;
 }
-.submit {
-  margin-left: 5vw;
-  width: 50%;
-  height: 75%;
-  grid-row-end: 7;
-  grid-column-end: 6;
+.para2 {
+  grid-column: 1/17;
+  grid-row: 5/9;
+}
+.para3 {
+  grid-column: 1/17;
+  grid-row: 9/13;
 }

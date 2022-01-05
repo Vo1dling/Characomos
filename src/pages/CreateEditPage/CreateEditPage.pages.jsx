@@ -1,9 +1,10 @@
-import React, { useRef } from "react";
+import React, { useEffect, useRef } from "react";
 import api from "../../components/api/api";
 import CustomInput from "../../components/CustomInput/CustomInput.components";
 import CustomButton from "../../components/CustomButton/CustomButton.components";
 import "./CreateEditPage.styles.css";
-const CreatePage = () => {
+import { Link } from "react-router-dom";
+const CreatePage = ({ data, editID, editing, setEdit }) => {
   const nameRef = useRef("");
   const imageRef = useRef("");
   const originRef = useRef("");
@@ -19,7 +20,9 @@ const CreatePage = () => {
   const mediumARef = useRef("");
   const hardQRef = useRef("");
   const hardARef = useRef("");
-
+  useEffect(() => {
+    setupEdit();
+  }, [editing]);
   const postItem = async (e) => {
     const name = nameRef.current.value;
     const imageURL = imageRef.current.value;
@@ -54,12 +57,33 @@ const CreatePage = () => {
       hardQuestion: `${hardQ}`,
       hardAnswer: `${hardA}`,
     };
-    if (e.target.id) {
-      await api.put(e.target.id, item);
+    if (editing === "true") {
+      await api.put(editID, item);
+      setEdit("false");
     } else {
       await api.post("", item);
     }
   };
+  const setupEdit = () => {
+    if (editing === "true") {
+      nameRef.current.value = data[editID - 1].name;
+      imageRef.current.value = data[editID - 1].imageURL;
+      originRef.current.value = data[editID - 1].origin;
+      regionRef.current.value = data[editID - 1].region;
+      authorRef.current.value = data[editID - 1].author;
+      titleRef1.current.value = data[editID - 1].paragraph1Title;
+      contentRef1.current.value = data[editID - 1].paragraph1Content;
+      titleRef2.current.value = data[editID - 1].paragraph2Title;
+      contentRef2.current.value = data[editID - 1].paragraph2Content;
+      titleRef3.current.value = data[editID - 1].paragraph3Title;
+      contentRef3.current.value = data[editID - 1].paragraph3Content;
+      mediumQRef.current.value = data[editID - 1].normalQuestion;
+      mediumARef.current.value = data[editID - 1].normalAnswer;
+      hardQRef.current.value = data[editID - 1].hardQuestion;
+      hardARef.current.value = data[editID - 1].hardAnswer;
+    }
+  };
+
   return (
     <div className="create-page">
       <div className="grid">
@@ -81,13 +105,13 @@ const CreatePage = () => {
           <img className="character-image" src="" alt="" />
           <CustomInput
             type="text"
-            className="input origin"
+            className="input image"
             inputRef={imageRef}
             placeHolder="Please Enter The ImageURL"
           ></CustomInput>
           <CustomInput
             type="text"
-            className="input origin"
+            className="input name"
             inputRef={nameRef}
             placeHolder="Please Enter The Character's Name"
           ></CustomInput>
@@ -164,9 +188,9 @@ const CreatePage = () => {
             placeHolder="Please Enter The Paragraph's Content"
           ></CustomInput>
         </div>
-        <CustomButton onClick={postItem} className="submit">
-          Submit
-        </CustomButton>
+        <Link to={editID} onClick={postItem} className="submit">
+          Post
+        </Link>
       </div>
     </div>
   );

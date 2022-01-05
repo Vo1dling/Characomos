@@ -11,6 +11,8 @@ const App = () => {
   const [data, setData] = useState([]);
   const [filteredData, setFilteredData] = useState([]);
   const [currentDifficulty, setDifficulty] = useState("");
+  const [id, setID] = useState("");
+  const [editing, setEdit] = useState("false");
 
   useEffect(() => {
     const getData = async () => {
@@ -18,7 +20,7 @@ const App = () => {
       setData(data);
     };
     getData();
-  }, []);
+  }, [filteredData]);
   const search = (e) => {
     if (e.target.value === "") setFilteredData([]);
     else
@@ -32,12 +34,17 @@ const App = () => {
   };
   return (
     <BrowserRouter>
-      <Header />
+      <Header setEdit={setEdit} />
       <Route path="/" exact>
         <HomePage data={data} search={search} filteredData={filteredData} />
       </Route>
       <Route path="/create">
-        <CreateEditPage />
+        <CreateEditPage
+          data={data}
+          editID={id}
+          editing={editing}
+          setEdit={setEdit}
+        />
       </Route>
 
       <Route path="/flash">
@@ -49,8 +56,14 @@ const App = () => {
       </Route>
       {data.map((char) => {
         return (
-          <Route key={char.id} path={`/${char.name}`}>
-            <CharacterPage char={char} />
+          <Route key={char.id} path={`/${char.id}`}>
+            <CharacterPage
+              char={char}
+              editID={id}
+              setID={setID}
+              editing={editing}
+              setEdit={setEdit}
+            />
           </Route>
         );
       })}
