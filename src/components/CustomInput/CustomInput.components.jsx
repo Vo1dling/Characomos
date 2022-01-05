@@ -21,7 +21,7 @@ class CustomInput extends React.Component {
       return (
         <input
           type={type}
-          onChange={onChange}
+          onInput={onChange}
           placeholder={placeHolder}
           ref={inputRef}
           className={className}

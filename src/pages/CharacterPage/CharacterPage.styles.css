@@ -53,11 +53,9 @@ body::-webkit-scrollbar {
 }
 .origin,
 .region,
-.author,
-.name {
+.author {
   margin: 0.5rem 0.25rem 0 0;
 }
-
 .question {
   margin-top: 2rem;
 }
